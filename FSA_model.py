@@ -2,7 +2,7 @@ import pandas as pd
 
 class FootballScorersAnalyzerMODEL:
     def __init__(self):
-        self.df = pd.read_csv("Football_Scoreres_Analyzer.csv")
+        self.df = pd.read_csv("Football_Scorers_Analyzer.csv")
 
     def describe_data(self):
         if "Year" in self.df.columns:
