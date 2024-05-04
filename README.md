@@ -1,7 +1,6 @@
 # Football Scorers Analyzer
 
-The Football Scorers Analyzer is an application built with Python GUI that analyze the performance of football scorers. The application provides functionalities to summarize the data, show descriptive statistics, and visualize the data through distribution graphs. The application is intended to help football enthusiasts analyze the performance of football scorers and identify trends in their performance. 
-
+The Football Scorers Analyzer is an application designed to help football enthusiasts analyze and identify trends in football scorers' performance. The application provides functionalities to summarize the data, show descriptive statistics, and visualize the data through distribution graphs.
 ## Application Features
 
 - **Data Storytelling (in progress):** Summarize the data by using descriptive statistics, correlation, and performance and trends analysis. 
