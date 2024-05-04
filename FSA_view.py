@@ -60,8 +60,8 @@ class FootballScorersAnalyzerUI(tk.Tk):
         data_story_button.grid(row=0,
                                column=0,
                                sticky=tk.NSEW,
-                               ipadx=5,
-                               ipady=5)
+                               ipadx=3,
+                               ipady=3)
 
         descrpt_button = tk.Button(self.navbar_frame,
                                         text="DESCRIPTIVE STATISTICS",
@@ -71,8 +71,8 @@ class FootballScorersAnalyzerUI(tk.Tk):
         descrpt_button.grid(row=0,
                             column=1,
                             sticky=tk.NSEW,
-                            ipadx=5,
-                            ipady=5)
+                            ipadx=3,
+                            ipady=3)
 
         corr_button = tk.Button(self.navbar_frame,
                                 text="CORRELATION",
@@ -82,27 +82,37 @@ class FootballScorersAnalyzerUI(tk.Tk):
         corr_button.grid(row=0,
                          column=2,
                          sticky=tk.NSEW,
-                         ipadx=5,
-                         ipady=5)
+                         ipadx=3,
+                         ipady=3)
+
+        distribution_button = tk.Button(self.navbar_frame,
+                                        text="DISTRIBUTION GRAPH",
+                                        width=20, height=3)
+        distribution_button.bind("<Button-1>", self.distribution_graph_page)
+        distribution_button.grid(row=0,
+                                column=3,
+                                sticky=tk.NSEW,
+                                ipadx=3,
+                                ipady=3)
 
         perf_trends_button = tk.Button(self.navbar_frame,
                                        text="PERFORMANCE & TRENDS",
                                        width=20, height=3)
         perf_trends_button.bind("<Button-1>", self.performance_trends_page)
         perf_trends_button.grid(row=0,
-                                column=3,
+                                column=4,
                                 sticky=tk.NSEW,
-                                ipadx=5,
-                                ipady=5)
+                                ipadx=3,
+                                ipady=3)
 
         quit_button = tk.Button(self.navbar_frame, text="QUIT", width=10,
                                 height=3,
                                 command=self.quit)
         quit_button.grid(row=0,
-                         column=4,
+                         column=5,
                          sticky=tk.NSEW,
-                         ipadx=5,
-                         ipady=5)
+                         ipadx=3,
+                         ipady=3)
 
     def welcome_page(self):
         ascii_saved = """
@@ -150,16 +160,19 @@ class FootballScorersAnalyzerUI(tk.Tk):
         # clear previous frame
         self.clearing_frame()
 
-        # menu
         descriptive_menu = tk.Frame(self.information_menu_frame)
-        descriptive_key = self.controller.get_desciptive_statistics_keys()
+        descriptive_key = self.controller.get_descriptive_statistics_keys()
         descriptive_menu_listbox = tk.Listbox(descriptive_menu)
         for key, val in descriptive_key.items():
             descriptive_menu_listbox.insert(tk.END, key)
         descriptive_menu_listbox.bind("<<ListboxSelect>>",
                                       self.descriptive_stats_handler)
-        descriptive_menu_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-        descriptive_menu.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        descriptive_menu_listbox.pack(side=tk.LEFT,
+                                      fill=tk.BOTH,
+                                      expand=True)
+        descriptive_menu.pack(side=tk.LEFT,
+                              fill=tk.BOTH,
+                              expand=True)
 
     def descriptive_stats_handler(self, event=None):
         """Display descriptive statistics"""
@@ -178,16 +191,44 @@ class FootballScorersAnalyzerUI(tk.Tk):
                 label = tk.Label(self.information_display_frame,
                                  text=f"{key}: {value}")
                 label.pack()
-        else:
-            label = tk.Label(self.information_display_frame,
-                             text="SELECT AN ATTRIBUTE FIRST...")
-            label.pack()
 
     def correlation_stats_page(self, event=None):
         """Correlation statistics page(in progress)"""
         # clear previous frame
         self.clearing_frame()
 
+    def distribution_graph_page(self, event=None):
+        """Distribution graph page"""
+        # clear previous frame
+        self.clearing_frame()
+
+        self.distribution_attributes = ["Goals",
+                                   "Expected Goals",
+                                   "Shots",
+                                   "On Target"]
+        distribution_menu = tk.Frame(self.information_menu_frame)
+        distribution_menu_listbox = tk.Listbox(distribution_menu)
+        for attribute in self.distribution_attributes:
+            distribution_menu_listbox.insert(tk.END, attribute)
+        distribution_menu_listbox.bind("<<ListboxSelect>>",
+                                      self.distribution_graph_handler)
+        distribution_menu_listbox.pack(side=tk.LEFT,
+                                       fill=tk.BOTH,
+                                       expand=True)
+        distribution_menu.pack(side=tk.LEFT,
+                               fill=tk.BOTH,
+                               expand=True)
+
+    def distribution_graph_handler(self, event=None):
+        """Display distribution graph"""
+        for widget in self.information_display_frame.winfo_children():
+            widget.destroy()
+
+        selected_index = event.widget.curselection()
+        if selected_index:
+            menu_selected = event.widget.get(selected_index[0])
+            self.controller.get_distribution_values(menu_selected,
+                                                    self.information_display_frame)
 
     def performance_trends_page(self, event=None):
         """Performance and trends page(in progress)"""
