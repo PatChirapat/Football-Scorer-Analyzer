@@ -37,3 +37,4 @@ The Football Scorers Analyzer is an application designed to help football enthus
    ```bash
     python main.py
     ```
+   

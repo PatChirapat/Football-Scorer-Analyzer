@@ -20,3 +20,4 @@ class FootballScorersAnalyzerCONTROLLER:
 
     def run(self):
         self.view.run()
+

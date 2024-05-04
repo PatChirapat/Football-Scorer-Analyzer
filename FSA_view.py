@@ -244,3 +244,4 @@ class FootballScorersAnalyzerUI(tk.Tk):
 
     def run(self):
         self.mainloop()
+

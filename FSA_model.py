@@ -35,3 +35,4 @@ class FootballScorersAnalyzerMODEL:
             canvas = FigureCanvasTkAgg(fig, master=display_frame)
             canvas.draw()
             canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
