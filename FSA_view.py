@@ -156,7 +156,6 @@ class FootballScorersAnalyzerUI(tk.Tk):
         self.clearing_frame()
 
     def descriptive_stats_page(self, event=None):
-        """Descriptive statistics page"""
         # clear previous frame
         self.clearing_frame()
 
@@ -174,7 +173,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
                               fill=tk.BOTH,
                               expand=True)
 
-    def descriptive_stats_handler(self, event=None):
+    def descriptive_stats_handler(self, event=None, year_select=None):
         """Display descriptive statistics"""
         for widget in self.information_display_frame.winfo_children():
             widget.destroy()
@@ -184,7 +183,8 @@ class FootballScorersAnalyzerUI(tk.Tk):
             menu_selected = event.widget.get(selected_index[0])
 
             # Get descriptive statistics for the selected attribute
-            descriptive_statistics = self.controller.get_descriptive_statistics_values(menu_selected)
+            descriptive_statistics = self.controller.get_descriptive_statistics_values(
+                menu_selected)
 
             # Display the descriptive statistics
             for key, value in descriptive_statistics.items():
@@ -196,6 +196,46 @@ class FootballScorersAnalyzerUI(tk.Tk):
         """Correlation statistics page(in progress)"""
         # clear previous frame
         self.clearing_frame()
+
+        self.correlation_attributes = ["Matches Played and Goals",
+                                       "On Target and Goals",
+                                       "Expected Goals and Goals",
+                                       "Shots and Goals"]
+        correlation_menu = tk.Frame(self.information_menu_frame)
+        correlation_menu_listbox = tk.Listbox(correlation_menu)
+        for attribute in self.correlation_attributes:
+            correlation_menu_listbox.insert(tk.END, attribute)
+        correlation_menu_listbox.bind("<<ListboxSelect>>",
+                                        self.correlation_stats_handler)
+        correlation_menu_listbox.pack(side=tk.TOP,
+                                        fill=tk.BOTH,
+                                        expand=True)
+        correlation_menu.pack(side=tk.LEFT,
+                              fill=tk.BOTH,
+                              expand=True)
+
+    def correlation_stats_handler(self, event=None):
+        """Display correlation statistics"""
+        for widget in self.information_display_frame.winfo_children():
+            widget.destroy()
+
+        selected_index = event.widget.curselection()
+        if selected_index:
+            menu_selected = event.widget.get(selected_index[0])
+            if menu_selected == "Matches Played and Goals":
+                key1 = "Matches Played"
+                key2 = "Goals"
+            elif menu_selected == "On Target and Goals":
+                key1 = "On Target"
+                key2 = "Goals"
+            elif menu_selected == "Expected Goals and Goals":
+                key1 = "Expected Goals"
+                key2 = "Goals"
+            elif menu_selected == "Shots and Goals":
+                key1 = "Shots"
+                key2 = "Goals"
+            self.controller.get_correlation_values(key1, key2,
+                                                   self.information_display_frame)
 
     def distribution_graph_page(self, event=None):
         """Distribution graph page"""
@@ -244,4 +284,3 @@ class FootballScorersAnalyzerUI(tk.Tk):
 
     def run(self):
         self.mainloop()
-

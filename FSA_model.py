@@ -1,10 +1,15 @@
 import tkinter as tk
+
+import matplotlib
 import numpy as np
 import pandas as pd
 import random
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+matplotlib.use('TkAgg')
 from matplotlib.figure import Figure
+import seaborn as sns
+
 
 class FootballScorersAnalyzerMODEL:
     def __init__(self):
@@ -13,7 +18,8 @@ class FootballScorersAnalyzerMODEL:
     def describe_data(self):
         """Compute the descriptive statistics of the data"""
         if "Year" in self.df.columns:
-            return self.df.drop(columns=["Year"]).select_dtypes(include=['int64', 'float64']).describe()
+            return self.df.drop(columns=["Year"]).select_dtypes(
+                include=['int64', 'float64']).describe()
         return self.df.select_dtypes(include=['int64', 'float64']).describe()
 
     def get_distribution(self, key, display_frame):
@@ -36,3 +42,24 @@ class FootballScorersAnalyzerMODEL:
             canvas.draw()
             canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
+            return canvas
+
+    def get_correlation(self, key1, key2, display_frame):
+        """Compute and display the correlation graph between two keys"""
+        graph_color = ["red", "green", "blue", "purple"]
+        if key1 in self.df.columns and key2 in self.df.columns:
+            fig, ax = plt.subplots(figsize=(6, 4))
+            sns.scatterplot(data=self.df, x=key1, y=key2,
+                             color=random.choice(graph_color), ax=ax)
+            ax.set_xlabel(key1)
+            ax.set_ylabel(key2)
+            ax.set_title(f'Correlation between {key1} and {key2}')
+            ax.grid(True)
+            plt.tight_layout()
+
+            # Plot the graph in the display frame
+            canvas = FigureCanvasTkAgg(fig, master=display_frame)
+            canvas.draw()
+            canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+            return canvas
