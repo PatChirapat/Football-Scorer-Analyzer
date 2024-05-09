@@ -275,6 +275,51 @@ class FootballScorersAnalyzerUI(tk.Tk):
         # clear previous frame
         self.clearing_frame()
 
+        perf_trends_menu = tk.Frame(self.information_menu_frame)
+
+        performance_button = tk.Button(perf_trends_menu,
+                                      text="PERFORMANCE",
+                                      width=20,
+                                      height=3)
+        performance_button.bind("<Button-2>", self.performance_handler)
+        performance_button.pack(side=tk.TOP,
+                                fill=tk.BOTH,
+                                expand=True)
+
+        comparing_button = tk.Button(perf_trends_menu,
+                                      text="COMPARING",
+                                      width=20,
+                                      height=3)
+        comparing_button.bind("<Button-2>", self.comparing_handler)
+        comparing_button.pack(side=tk.TOP,
+                              fill=tk.BOTH,
+                              expand=True)
+
+        trends_button = tk.Button(perf_trends_menu,
+                                    text="TRENDS",
+                                    width=20,
+                                    height=3)
+        trends_button.bind("<Button-2>", self.trends_handler)
+        trends_button.pack(side=tk.TOP,
+                            fill=tk.BOTH,
+                            expand=True)
+
+        perf_trends_menu.pack(side=tk.TOP,
+                              fill=tk.BOTH,
+                              expand=True)
+
+    def performance_handler(self, event=None):
+        """Performance handler(in progress)"""
+        pass
+
+    def comparing_handler(self, event=None):
+        """Comparing handler(in progress)"""
+        pass
+
+    def trends_handler(self, event=None):
+        """Trends handler(in progress)"""
+        pass
+
     def clearing_frame(self):
         """Clearing every widget in the frame"""
         for widget in self.information_menu_frame.winfo_children():
