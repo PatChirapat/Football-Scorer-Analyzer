@@ -7,7 +7,7 @@ The Football Scorers Analyzer is an application designed to help football enthus
 
 - **Descriptive Statistics:** Show descriptive statistics such as mean, median, min, max, etc., for different attributes of football scorers' data.
 
-- **Correlation (in progress):** Show the correlation between goals with other attributes like expected goals, shots, and on-target shots.
+- **Correlation:** Show the correlation between goals with other attributes like expected goals, shots, and on-target shots.
 
 - **Distribution Graph:** Show distribution graphs for attributes including goals, expected goals, shots, and on-target shots to understand the distribution of data.
 
