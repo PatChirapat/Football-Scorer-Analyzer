@@ -193,7 +193,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
                 label.pack()
 
     def correlation_stats_page(self, event=None):
-        """Correlation statistics page(in progress)"""
+        """Correlation statistics page"""
         # clear previous frame
         self.clearing_frame()
 
@@ -278,10 +278,10 @@ class FootballScorersAnalyzerUI(tk.Tk):
         perf_trends_menu = tk.Frame(self.information_menu_frame)
 
         performance_button = tk.Button(perf_trends_menu,
-                                      text="PERFORMANCE",
+                                      text="TOP SCORERS/LEAGUES",
                                       width=20,
                                       height=3)
-        performance_button.bind("<Button-2>", self.performance_handler)
+        performance_button.bind("<Button-1>", self.toprank)
         performance_button.pack(side=tk.TOP,
                                 fill=tk.BOTH,
                                 expand=True)
@@ -290,17 +290,17 @@ class FootballScorersAnalyzerUI(tk.Tk):
                                       text="COMPARING",
                                       width=20,
                                       height=3)
-        comparing_button.bind("<Button-2>", self.comparing_handler)
+        comparing_button.bind("<Button-1>", self.comparing)
         comparing_button.pack(side=tk.TOP,
                               fill=tk.BOTH,
                               expand=True)
 
-        trends_button = tk.Button(perf_trends_menu,
-                                    text="TRENDS",
+        timeseries_button = tk.Button(perf_trends_menu,
+                                    text="TIMESERIES",
                                     width=20,
                                     height=3)
-        trends_button.bind("<Button-2>", self.trends_handler)
-        trends_button.pack(side=tk.TOP,
+        timeseries_button.configure(command=self.timeseries)
+        timeseries_button.pack(side=tk.TOP,
                             fill=tk.BOTH,
                             expand=True)
 
@@ -308,17 +308,76 @@ class FootballScorersAnalyzerUI(tk.Tk):
                               fill=tk.BOTH,
                               expand=True)
 
-    def performance_handler(self, event=None):
+    def toprank(self, event=None):
         """Performance handler(in progress)"""
-        pass
+        # clear previous frame
+        self.clearing_frame()
 
-    def comparing_handler(self, event=None):
+        year_list = ["2016", "2017", "2018", "2019", "2020"]
+        timeseries_list = ["TOP SCORERS", "TOP LEAGUES"]
+
+        topranked_menu = tk.Frame(self.information_menu_frame)
+
+        year_label = tk.Label(topranked_menu,
+                              text="SELECT YEAR")
+        year_label.pack(side=tk.TOP,
+                        fill=tk.BOTH,
+                        expand=True)
+        self.year_combobox = ttk.Combobox(topranked_menu,
+                                          values=year_list)
+        self.year_combobox.pack(side=tk.TOP,
+                                fill=tk.BOTH,
+                                expand=True)
+
+        timeseries_label = tk.Label(topranked_menu,
+                                    text="SELECT CATEGORY")
+        timeseries_label.pack(side=tk.TOP,
+                              fill=tk.BOTH,
+                              expand=True)
+        self.tp_combobox = ttk.Combobox(topranked_menu,
+                                        values=timeseries_list)
+        self.tp_combobox.pack(side=tk.TOP,
+                              fill=tk.BOTH,
+                              expand=True)
+
+        show_button = tk.Button(topranked_menu,
+                                text="SHOW",
+                                width=10,
+                                height=2)
+        show_button.bind("<Button-1>", self.toprank_handler)
+        show_button.pack(side=tk.TOP,
+                         fill=tk.BOTH,
+                         expand=True)
+
+        topranked_menu.pack(side=tk.TOP,
+                             fill=tk.BOTH,
+                             expand=True)
+
+    def toprank_handler(self, event=None):
+        """Timeseries handler"""
+        for widget in self.information_display_frame.winfo_children():
+            widget.destroy()
+
+        year_selected = self.year_combobox.get()
+        category_selected = self.tp_combobox.get()
+
+        if year_selected and category_selected != "":
+            if category_selected == "TOP SCORERS":
+                key1 = year_selected
+                key2 = "Player Names"
+            elif category_selected == "TOP LEAGUES":
+                key1 = year_selected
+                key2 = "League"
+        self.controller.get_top_ranked_values(key1, key2,
+                                              self.information_display_frame)
+
+    def comparing(self, event=None):
         """Comparing handler(in progress)"""
         pass
 
-    def trends_handler(self, event=None):
-        """Trends handler(in progress)"""
-        pass
+    def timeseries(self, event=None):
+        """Trends of the top scorers and leagues."""
+
 
     def clearing_frame(self):
         """Clearing every widget in the frame"""
@@ -328,4 +387,5 @@ class FootballScorersAnalyzerUI(tk.Tk):
             widget.destroy()
 
     def run(self):
+        """Run the application"""
         self.mainloop()

@@ -22,5 +22,9 @@ class FootballScorersAnalyzerCONTROLLER:
         return self.model.get_correlation(key1, key2,
                                           self.view.information_display_frame)
 
+    def get_top_ranked_values(self, key1, key2, display_frame):
+        return self.model.get_top_ranked(key1, key2,
+                                         self.view.information_display_frame)
+
     def run(self):
         self.view.run()

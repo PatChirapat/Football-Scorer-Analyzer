@@ -63,3 +63,26 @@ class FootballScorersAnalyzerMODEL:
             canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
             return canvas
+
+    def get_top_ranked(self, key1, key2, display_frame):
+        """Display the time series line graph of top10 key2(player names or league)
+        over key1(year)"""
+        graph_color = ["red", "green", "blue", "purple"]
+        year_selected = self.df[self.df['Year'] == int(key1)]
+        year_selected = year_selected.sort_values(by='Goals',
+                                                  ascending=False)
+        top10 = year_selected.head(5)
+        fig, ax = plt.subplots(figsize=(6, 4))
+        sns.barplot(data=top10, x=str(key2), y='Goals', color=random.choice(graph_color),
+                    ax=ax)
+        ax.set_xlabel(key2)
+        ax.set_ylabel('Goals')
+        ax.set_title(f'Top 5 {key2} in {key1}')
+
+
+        # Plot the graph in the display frame
+        canvas = FigureCanvasTkAgg(fig, master=display_frame)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+        return canvas
