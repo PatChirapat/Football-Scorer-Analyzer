@@ -278,7 +278,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
         perf_trends_menu = tk.Frame(self.information_menu_frame)
 
         performance_button = tk.Button(perf_trends_menu,
-                                      text="TOP SCORERS/LEAGUES",
+                                      text="TOP OF THE RANKS",
                                       width=20,
                                       height=3)
         performance_button.bind("<Button-1>", self.toprank)
@@ -309,36 +309,30 @@ class FootballScorersAnalyzerUI(tk.Tk):
                               expand=True)
 
     def toprank(self, event=None):
-        """Performance handler(in progress)"""
+        """Top Players and Leagues"""
         # clear previous frame
         self.clearing_frame()
 
         year_list = ["2016", "2017", "2018", "2019", "2020"]
-        timeseries_list = ["TOP SCORERS", "TOP LEAGUES"]
+        topranked_list = ["TOP SCORERS",
+                          "TOP LEAGUES",
+                          "TOP CLUBS"]
 
         topranked_menu = tk.Frame(self.information_menu_frame)
 
-        year_label = tk.Label(topranked_menu,
-                              text="SELECT YEAR")
-        year_label.pack(side=tk.TOP,
-                        fill=tk.BOTH,
-                        expand=True)
         self.year_combobox = ttk.Combobox(topranked_menu,
                                           values=year_list)
         self.year_combobox.pack(side=tk.TOP,
                                 fill=tk.BOTH,
                                 expand=True)
+        self.year_combobox.set("SELECT YEAR")
 
-        timeseries_label = tk.Label(topranked_menu,
-                                    text="SELECT CATEGORY")
-        timeseries_label.pack(side=tk.TOP,
-                              fill=tk.BOTH,
-                              expand=True)
-        self.tp_combobox = ttk.Combobox(topranked_menu,
-                                        values=timeseries_list)
-        self.tp_combobox.pack(side=tk.TOP,
-                              fill=tk.BOTH,
-                              expand=True)
+        self.tr_category_combobox = ttk.Combobox(topranked_menu,
+                                                 values=topranked_list)
+        self.tr_category_combobox.pack(side=tk.TOP,
+                                       fill=tk.BOTH,
+                                       expand=True)
+        self.tr_category_combobox.set("SELECT CATEGORY")
 
         show_button = tk.Button(topranked_menu,
                                 text="SHOW",
@@ -354,12 +348,12 @@ class FootballScorersAnalyzerUI(tk.Tk):
                              expand=True)
 
     def toprank_handler(self, event=None):
-        """Timeseries handler"""
+        """Top Players and Leagues handler"""
         for widget in self.information_display_frame.winfo_children():
             widget.destroy()
 
         year_selected = self.year_combobox.get()
-        category_selected = self.tp_combobox.get()
+        category_selected = self.tr_category_combobox.get()
 
         if year_selected and category_selected != "":
             if category_selected == "TOP SCORERS":
@@ -368,16 +362,121 @@ class FootballScorersAnalyzerUI(tk.Tk):
             elif category_selected == "TOP LEAGUES":
                 key1 = year_selected
                 key2 = "League"
+            elif category_selected == "TOP CLUBS":
+                key1 = year_selected
+                key2 = "Club"
         self.controller.get_top_ranked_values(key1, key2,
                                               self.information_display_frame)
 
     def comparing(self, event=None):
-        """Comparing handler(in progress)"""
+        """Comparing stats of top scorers and leagues"""
         pass
 
     def timeseries(self, event=None):
-        """Trends of the top scorers and leagues."""
+        """Timeseries of top scorers and leagues"""
+        # clear previous frame
+        self.clearing_frame()
 
+        ts_menu = tk.Frame(self.information_menu_frame)
+        self.menu_combobox = ttk.Combobox(ts_menu,
+                                    values=["PLAYER", "LEAGUE", "CLUB"])
+        self.menu_combobox.bind("<<ComboboxSelected>>", self.timeseries_menu_update)
+        self.menu_combobox.pack(side=tk.TOP,
+                            fill=tk.BOTH,
+                            expand=True)
+        self.menu_combobox.set("SELECT CATEGORY")
+        ts_menu.pack(side=tk.TOP,
+                    fill=tk.BOTH,
+                    expand=True)
+
+    def timeseries_menu_update(self, event=None):
+        """Update timeseries menu"""
+        selected_index = self.menu_combobox.get()
+
+        if hasattr(self, "player_combobox"):
+            self.player_combobox.destroy()
+        if hasattr(self, "league_combobox"):
+            self.league_combobox.destroy()
+        if hasattr(self, "club_combobox"):
+            self.club_combobox.destroy()
+        if hasattr(self, "ts_wanted_combobox"):
+            self.ts_wanted_combobox.destroy()
+        if hasattr(self, "ts_show_button"):
+            self.ts_show_button.destroy()
+
+        if selected_index == "PLAYER":
+            player_names = self.controller.get_player()
+            self.player_combobox = ttk.Combobox(self.information_menu_frame,
+                                                values=player_names)
+            self.player_combobox.bind("<<ComboboxSelected>>", self.timeseries_wanted)
+            self.player_combobox.pack(side=tk.TOP,
+                                    fill=tk.BOTH,
+                                    expand=True)
+            self.player_combobox.set("SELECT PLAYER")
+        elif selected_index == "LEAGUE":
+            league_names = self.controller.get_league()
+            self.league_combobox = ttk.Combobox(self.information_menu_frame,
+                                            values=league_names)
+            self.league_combobox.bind("<<ComboboxSelected>>", self.timeseries_wanted)
+            self.league_combobox.pack(side=tk.TOP,
+                                    fill=tk.BOTH,
+                                    expand=True)
+            self.league_combobox.set("SELECT LEAGUE")
+        elif selected_index == "CLUB":
+            club_names = self.controller.get_club()
+            self.club_combobox = ttk.Combobox(self.information_menu_frame,
+                                            values=club_names)
+            self.club_combobox.bind("<<ComboboxSelected>>", self.timeseries_wanted)
+            self.club_combobox.pack(side=tk.TOP,
+                                    fill=tk.BOTH,
+                                    expand=True)
+            self.club_combobox.set("SELECT CLUB")
+
+    def timeseries_wanted(self, event=None):
+        """Timeseries wanted"""
+        if hasattr(self, "ts_wanted_combobox"):
+            self.ts_wanted_combobox.destroy()
+        if hasattr(self, "ts_show_button"):
+            self.ts_show_button.destroy()
+
+        wanted_list = ["Matches Played", "Substitution", "Mins", "Goals",
+                       "Expected Goals", "Expected Goals Per Avg Match",
+                       "Shots", "On Target", "Shots Per Avg Match",
+                       "On Target Per Avg Match"]
+        self.ts_wanted_combobox = ttk.Combobox(self.information_menu_frame,
+                                               values=wanted_list)
+        self.ts_wanted_combobox.pack(side=tk.TOP,
+                                     fill=tk.BOTH,
+                                     expand=True)
+        self.ts_wanted_combobox.set("SELECT TIMESERIES TOPIC")
+
+        self.ts_show_button = tk.Button(self.information_menu_frame,
+                                text="SHOW",
+                                width=10,
+                                height=2)
+        self.ts_show_button.bind("<Button-1>", self.timeseries_handler)
+        self.ts_show_button.pack(side=tk.TOP,
+                            fill=tk.BOTH,
+                            expand=True)
+
+    def timeseries_handler(self, event=None):
+        """Timeseries handler"""
+        for widget in self.information_display_frame.winfo_children():
+            widget.destroy()
+
+        selected_index = self.menu_combobox.get()
+        key3 = self.ts_wanted_combobox.get()
+        if selected_index == "PLAYER":
+            key1 = "Player Names"
+            key2 = self.player_combobox.get()
+        elif selected_index == "LEAGUE":
+            key1 = "League"
+            key2 = self.league_combobox.get()
+        elif selected_index == "CLUB":
+            key1 = "Club"
+            key2 = self.club_combobox.get()
+        self.controller.get_timeseries_values(key1, key2, key3,
+                                              self.information_display_frame)
 
     def clearing_frame(self):
         """Clearing every widget in the frame"""

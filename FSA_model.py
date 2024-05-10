@@ -65,8 +65,7 @@ class FootballScorersAnalyzerMODEL:
             return canvas
 
     def get_top_ranked(self, key1, key2, display_frame):
-        """Display the time series line graph of top10 key2(player names or league)
-        over key1(year)"""
+        """Display the top 5 players in a selected year based on the selected key"""
         graph_color = ["red", "green", "blue", "purple"]
         year_selected = self.df[self.df['Year'] == int(key1)]
         year_selected = year_selected.sort_values(by='Goals',
@@ -78,7 +77,8 @@ class FootballScorersAnalyzerMODEL:
         ax.set_xlabel(key2)
         ax.set_ylabel('Goals')
         ax.set_title(f'Top 5 {key2} in {key1}')
-
+        ax.grid(True)
+        plt.tight_layout()
 
         # Plot the graph in the display frame
         canvas = FigureCanvasTkAgg(fig, master=display_frame)
@@ -86,3 +86,34 @@ class FootballScorersAnalyzerMODEL:
         canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
         return canvas
+
+    def get_player_names(self):
+        return self.df["Player Names"].value_counts()[self.df["Player Names"].value_counts() >= 3].index.tolist()
+
+    def get_club_names(self):
+        return self.df["Club"].value_counts().index.tolist()
+
+    def get_league_names(self):
+        return self.df["League"].value_counts().index.tolist()
+
+    def get_timeseries(self, key1, key2, key3, display_frame):
+        """Plot the time series graph(2016 - 2020) of the selected key
+        key1: column attribute, key2: stat that will be plotted on the y-axis
+        x = Year"""
+        graph_color = ["red", "green", "blue", "purple"]
+        key_selected = self.df[self.df[key1] == key2]
+        fig, ax = plt.subplots(figsize=(6, 4))
+        sns.lineplot(data=key_selected, x='Year', y=str(key3),
+                     color=random.choice(graph_color), ax=ax)
+        ax.set_xlabel('Year')
+        ax.set_ylabel(key3)
+        ax.set_title(f'Time Series of {key3} for {key2}')
+        ax.grid(True)
+        plt.tight_layout()
+
+        # Plot the graph in the display frame
+        canvas = FigureCanvasTkAgg(fig, master=display_frame)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+

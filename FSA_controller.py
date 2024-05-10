@@ -26,5 +26,18 @@ class FootballScorersAnalyzerCONTROLLER:
         return self.model.get_top_ranked(key1, key2,
                                          self.view.information_display_frame)
 
+    def get_player(self):
+        return self.model.get_player_names()
+
+    def get_club(self):
+        return self.model.get_club_names()
+
+    def get_league(self):
+        return self.model.get_league_names()
+
+    def get_timeseries_values(self, key1, key2, key3, display_frame):
+        return self.model.get_timeseries(key1, key2, key3,
+                                         self.view.information_display_frame)
+
     def run(self):
         self.view.run()
