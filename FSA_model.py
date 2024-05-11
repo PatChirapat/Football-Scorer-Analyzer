@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 import matplotlib
 import numpy as np
@@ -170,18 +171,29 @@ class FootballScorersAnalyzerMODEL:
             FigureCanvasTkAgg: The canvas containing the plotted graph.
         """
         graph_color = ["red", "green", "blue", "purple"]
-        key1_selected = self.df[self.df[key1] == key2]
-        key2_selected = self.df[self.df[key1] == key3]
-        # display bar graph that overlaps the two selected keys
-        fig, ax = plt.subplots(figsize=(6, 4))
-        sns.barplot(data=key1_selected, x='Year', y=str(key4), color=random.choice(graph_color),
-                    ax=ax, label=key2)
-        sns.barplot(data=key2_selected, x='Year', y=str(key4), color=random.choice(graph_color),
-                    ax=ax, label=key3)
+
+        if key2 == key3:
+            messagebox.showwarning("Warning",
+                                   "Do not select the same stats for comparison.")
+            return None
+
+        selected_keys = self.df[
+            (self.df[key1] == key2) | (self.df[key1] == key3)]
+
+        # Create the plot
+        fig, ax = plt.subplots(figsize=(10, 6))
+        sns.barplot(data=selected_keys, x='Year', y=str(key4), hue=key1,
+                    palette=random.sample(graph_color, 2), dodge=True, ax=ax)
+
+        # Set labels and title
         ax.set_xlabel('Year')
         ax.set_ylabel(key4)
         ax.set_title(f'Comparison of {key2} and {key3}')
         ax.grid(True)
+
+        # Add legend
+        ax.legend()
+
         plt.tight_layout()
 
         # Plot the graph in the display frame
