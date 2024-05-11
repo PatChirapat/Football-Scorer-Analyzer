@@ -15,6 +15,11 @@ The Football Scorers Analyzer is an application designed to help football enthus
 
 - **Navigation Bar:** Navigate between different functionalities and features of the application.
 
+## Data Source
+
+The data used in the application is collected from the [Kaggle dataset](https://www.kaggle.com/datasets/mohamedhanyyy/top-football-leagues-scorers) 
+which contains the top football leagues' scorers data.
+
 ## User Interface
 
 ### Initial Application Screen
@@ -73,12 +78,27 @@ The Football Scorers Analyzer is an application designed to help football enthus
    ```bash
    git clone https://github.com/PatChirapat/Football-Scorer-Analyzer.git
     ```
-2. Install required dependencies:
+2. Change the directory:
    ```bash
-   pip install -r requirements.txt
+   cd Football-Scorer-Analyzer
    ```
-3. Run the application:
+3. Create a virtual environment:
+   for Windows:
    ```bash
+    python -m venv venv
+    venv\Scripts\activate
+    ```
+    for MacOS/Linux:
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
+4. Install the required packages:
+    ```bash
+    pip install -r requirements.txt
+    ```
+5. Run the application:
+    ```bash
     python main.py
     ```
 
