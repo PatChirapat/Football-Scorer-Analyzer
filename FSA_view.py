@@ -4,6 +4,7 @@ from tkinter import ttk
 
 class FootballScorersAnalyzerUI(tk.Tk):
     def __init__(self, controller):
+        """Initialize the UI with the controller."""
         super().__init__()
         self.information_display_frame = None
         self.information_menu_frame = None
@@ -115,6 +116,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
                          ipady=3)
 
     def welcome_page(self):
+        """Welcome page"""
         ascii_saved = """
     ░▒▓████████▓▒░▒▓██████▓▒░ ░▒▓██████▓▒░▒▓████████▓▒░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓█▓▒░        
     ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░        
@@ -156,6 +158,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
         self.clearing_frame()
 
     def descriptive_stats_page(self, event=None):
+        """Descriptive statistics page"""
         # clear previous frame
         self.clearing_frame()
 
@@ -174,7 +177,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
                               expand=True)
 
     def descriptive_stats_handler(self, event=None, year_select=None):
-        """Display descriptive statistics"""
+        """Display descriptive statistics handler"""
         for widget in self.information_display_frame.winfo_children():
             widget.destroy()
 
@@ -215,7 +218,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
                               expand=True)
 
     def correlation_stats_handler(self, event=None):
-        """Display correlation statistics"""
+        """Display correlation statistics handler"""
         for widget in self.information_display_frame.winfo_children():
             widget.destroy()
 
@@ -260,7 +263,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
                                expand=True)
 
     def distribution_graph_handler(self, event=None):
-        """Display distribution graph"""
+        """Display distribution graph handler"""
         for widget in self.information_display_frame.winfo_children():
             widget.destroy()
 
@@ -271,7 +274,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
                                                     self.information_display_frame)
 
     def performance_trends_page(self, event=None):
-        """Performance and trends page(in progress)"""
+        """Performance and trends page"""
         # clear previous frame
         self.clearing_frame()
 
@@ -309,7 +312,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
                               expand=True)
 
     def toprank(self, event=None):
-        """Top Players and Leagues"""
+        """Top of the ranks menu page"""
         # clear previous frame
         self.clearing_frame()
 
@@ -370,7 +373,145 @@ class FootballScorersAnalyzerUI(tk.Tk):
 
     def comparing(self, event=None):
         """Comparing stats of top scorers and leagues"""
-        pass
+        # clear previous frame
+        self.clearing_frame()
+
+        comparing_menu = tk.Frame(self.information_menu_frame)
+
+        comparing_list = ["PLAYER", "LEAGUE", "CLUB"]
+        self.comparing_combobox = ttk.Combobox(comparing_menu,
+                                            values=comparing_list)
+        self.comparing_combobox.pack(side=tk.TOP,
+                                fill=tk.BOTH,
+                                expand=True)
+        self.comparing_combobox.bind("<<ComboboxSelected>>", self.comparing_menu_update)
+        self.comparing_combobox.set("SELECT CATEGORY")
+
+        comparing_menu.pack(side=tk.TOP,
+                            fill=tk.BOTH,
+                            expand=True)
+
+    def comparing_menu_update(self, event=None):
+        """Update comparing menu"""
+        selected_index = self.comparing_combobox.get()
+
+        if hasattr(self, "player1_combobox"):
+            self.player1_combobox.destroy()
+        if hasattr(self, "player2_combobox"):
+            self.player2_combobox.destroy()
+        if hasattr(self, "league1_combobox"):
+            self.league1_combobox.destroy()
+        if hasattr(self, "league2_combobox"):
+            self.league2_combobox.destroy()
+        if hasattr(self, "club1_combobox"):
+            self.club1_combobox.destroy()
+        if hasattr(self, "club2_combobox"):
+            self.club2_combobox.destroy()
+        if hasattr(self, "wanted_combobox"):
+            self.wanted_combobox.destroy()
+        if hasattr(self, "show_button"):
+            self.show_button.destroy()
+
+        if selected_index == "PLAYER":
+            player_names = self.controller.get_player()
+            self.player1_combobox = ttk.Combobox(self.information_menu_frame,
+                                                values=player_names)
+            self.player1_combobox.bind("<<ComboboxSelected>>", self.comparing_wanted)
+            self.player1_combobox.pack(side=tk.TOP,
+                                    fill=tk.BOTH,
+                                    expand=True)
+            self.player1_combobox.set("SELECT FIRST PLAYER")
+
+            self.player2_combobox = ttk.Combobox(self.information_menu_frame,
+                                                values=player_names)
+            self.player2_combobox.bind("<<ComboboxSelected>>", self.comparing_wanted)
+            self.player2_combobox.pack(side=tk.TOP,
+                                    fill=tk.BOTH,
+                                    expand=True)
+            self.player2_combobox.set("SELECT SECOND PLAYER")
+        elif selected_index == "LEAGUE":
+            league_names = self.controller.get_league()
+            self.league1_combobox = ttk.Combobox(self.information_menu_frame,
+                                            values=league_names)
+            self.league1_combobox.bind("<<ComboboxSelected>>", self.comparing_wanted)
+            self.league1_combobox.pack(side=tk.TOP,
+                                    fill=tk.BOTH,
+                                    expand=True)
+            self.league1_combobox.set("SELECT FIRST LEAGUE")
+
+            self.league2_combobox = ttk.Combobox(self.information_menu_frame,
+                                            values=league_names)
+            self.league2_combobox.bind("<<ComboboxSelected>>", self.comparing_wanted)
+            self.league2_combobox.pack(side=tk.TOP,
+                                    fill=tk.BOTH,
+                                    expand=True)
+            self.league2_combobox.set("SELECT SECOND LEAGUE2")
+        elif selected_index == "CLUB":
+            club_names = self.controller.get_club()
+            self.club1_combobox = ttk.Combobox(self.information_menu_frame,
+                                            values=club_names)
+            self.club1_combobox.bind("<<ComboboxSelected>>", self.comparing_wanted)
+            self.club1_combobox.pack(side=tk.TOP,
+                                    fill=tk.BOTH,
+                                    expand=True)
+            self.club1_combobox.set("SELECT FIRST CLUB")
+
+            self.club2_combobox = ttk.Combobox(self.information_menu_frame,
+                                            values=club_names)
+            self.club2_combobox.bind("<<ComboboxSelected>>", self.comparing_wanted)
+            self.club2_combobox.pack(side=tk.TOP,
+                                    fill=tk.BOTH,
+                                    expand=True)
+            self.club2_combobox.set("SELECT SECOND CLUB")
+
+    def comparing_wanted(self, event=None):
+        """Comparing wanted"""
+        if hasattr(self, "wanted_combobox"):
+            self.wanted_combobox.destroy()
+        if hasattr(self, "show_button"):
+            self.show_button.destroy()
+
+        wanted_list = ["Matches Played", "Substitution", "Mins", "Goals",
+                       "Expected Goals", "Expected Goals Per Avg Match",
+                       "Shots", "On Target", "Shots Per Avg Match",
+                       "On Target Per Avg Match"]
+        self.wanted_combobox = ttk.Combobox(self.information_menu_frame,
+                                            values=wanted_list)
+        self.wanted_combobox.pack(side=tk.TOP,
+                                fill=tk.BOTH,
+                                expand=True)
+        self.wanted_combobox.set("SELECT TOPIC")
+
+        self.show_button = tk.Button(self.information_menu_frame,
+                                    text="SHOW",
+                                    width=10,
+                                    height=2)
+        self.show_button.bind("<Button-1>", self.comparing_handler)
+        self.show_button.pack(side=tk.TOP,
+                            fill=tk.BOTH,
+                            expand=True)
+
+    def comparing_handler(self, event=None):
+        """Comparing handler"""
+        for widget in self.information_display_frame.winfo_children():
+            widget.destroy()
+
+        selected_index = self.comparing_combobox.get()
+        key4 = self.wanted_combobox.get()
+        if selected_index == "PLAYER":
+            key1 = "Player Names"
+            key2 = self.player1_combobox.get()
+            key3 = self.player2_combobox.get()
+        elif selected_index == "LEAGUE":
+            key1 = "League"
+            key2 = self.league1_combobox.get()
+            key3 = self.league2_combobox.get()
+        elif selected_index == "CLUB":
+            key1 = "Club"
+            key2 = self.club1_combobox.get()
+            key3 = self.club2_combobox.get()
+        self.controller.get_comparing_values(key1, key2, key3, key4,
+                                            self.information_display_frame)
 
     def timeseries(self, event=None):
         """Timeseries of top scorers and leagues"""

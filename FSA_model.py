@@ -13,6 +13,7 @@ import seaborn as sns
 
 class FootballScorersAnalyzerMODEL:
     def __init__(self):
+        """Initialize the model by loading the dataset."""
         self.df = pd.read_csv("Football_Scorers_Analyzer.csv")
 
     def describe_data(self):
@@ -23,7 +24,15 @@ class FootballScorersAnalyzerMODEL:
         return self.df.select_dtypes(include=['int64', 'float64']).describe()
 
     def get_distribution(self, key, display_frame):
-        """Plot the distribution graph of the selected key"""
+        """Plot the distribution graph of the selected key.
+
+        Parameters:
+            key (str): The column name for which distribution is to be plotted.
+            display_frame (tk.Frame): The frame where the graph will be displayed.
+
+        Returns:
+            FigureCanvasTkAgg: The canvas containing the plotted graph.
+        """
         graph_color = ["red", "green", "blue", "purple"]
         if key in self.df.columns:
             key_selected = self.df[key]
@@ -45,7 +54,16 @@ class FootballScorersAnalyzerMODEL:
             return canvas
 
     def get_correlation(self, key1, key2, display_frame):
-        """Compute and display the correlation graph between two keys"""
+        """Compute and display the correlation graph between two keys.
+
+        Parameters:
+            key1 (str): The first column name for correlation.
+            key2 (str): The second column name for correlation.
+            display_frame (tk.Frame): The frame where the graph will be displayed.
+
+        Returns:
+            FigureCanvasTkAgg: The canvas containing the plotted graph.
+        """
         graph_color = ["red", "green", "blue", "purple"]
         if key1 in self.df.columns and key2 in self.df.columns:
             fig, ax = plt.subplots(figsize=(6, 4))
@@ -65,7 +83,16 @@ class FootballScorersAnalyzerMODEL:
             return canvas
 
     def get_top_ranked(self, key1, key2, display_frame):
-        """Display the top 5 players in a selected year based on the selected key"""
+        """Display the top 5 players in a selected year based on the selected key.
+
+        Parameters:
+            key1 (str): The selected year.
+            key2 (str): The attribute based on which top players are to be selected.
+            display_frame (tk.Frame): The frame where the graph will be displayed.
+
+        Returns:
+            FigureCanvasTkAgg: The canvas containing the plotted graph.
+        """
         graph_color = ["red", "green", "blue", "purple"]
         year_selected = self.df[self.df['Year'] == int(key1)]
         year_selected = year_selected.sort_values(by='Goals',
@@ -88,18 +115,29 @@ class FootballScorersAnalyzerMODEL:
         return canvas
 
     def get_player_names(self):
+        """Get the list of player names."""
         return self.df["Player Names"].value_counts()[self.df["Player Names"].value_counts() >= 3].index.tolist()
 
     def get_club_names(self):
+        """Get the list of club names."""
         return self.df["Club"].value_counts().index.tolist()
 
     def get_league_names(self):
+        """Get the list of league names."""
         return self.df["League"].value_counts().index.tolist()
 
     def get_timeseries(self, key1, key2, key3, display_frame):
-        """Plot the time series graph(2016 - 2020) of the selected key
-        key1: column attribute, key2: stat that will be plotted on the y-axis
-        x = Year"""
+        """Plot the time series graph(2016 - 2020) of the selected key.
+
+        Parameters:
+            key1 (str): Column attribute.
+            key2 (str): Category for which time series will be plotted.
+            key3 (str): Stat that will be plotted on the y-axis.
+            display_frame (tk.Frame): The frame where the graph will be displayed.
+
+        Returns:
+            FigureCanvasTkAgg: The canvas containing the plotted graph.
+        """
         graph_color = ["red", "green", "blue", "purple"]
         key_selected = self.df[self.df[key1] == key2]
         fig, ax = plt.subplots(figsize=(6, 4))
@@ -116,4 +154,39 @@ class FootballScorersAnalyzerMODEL:
         canvas.draw()
         canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
+        return canvas
 
+    def get_comparing(self, key1, key2, key3, key4, display_frame):
+        """Compare and display the stats of key2 and key3 for a selected category key1.
+
+        Parameters:
+            key1 (str): Category.
+            key2 (str): First stat.
+            key3 (str): Second stat.
+            key4 (str): Wanted stat.
+            display_frame (tk.Frame): The frame where the graph will be displayed.
+
+        Returns:
+            FigureCanvasTkAgg: The canvas containing the plotted graph.
+        """
+        graph_color = ["red", "green", "blue", "purple"]
+        key1_selected = self.df[self.df[key1] == key2]
+        key2_selected = self.df[self.df[key1] == key3]
+        # display bar graph that overlaps the two selected keys
+        fig, ax = plt.subplots(figsize=(6, 4))
+        sns.barplot(data=key1_selected, x='Year', y=str(key4), color=random.choice(graph_color),
+                    ax=ax, label=key2)
+        sns.barplot(data=key2_selected, x='Year', y=str(key4), color=random.choice(graph_color),
+                    ax=ax, label=key3)
+        ax.set_xlabel('Year')
+        ax.set_ylabel(key4)
+        ax.set_title(f'Comparison of {key2} and {key3}')
+        ax.grid(True)
+        plt.tight_layout()
+
+        # Plot the graph in the display frame
+        canvas = FigureCanvasTkAgg(fig, master=display_frame)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+        return canvas
