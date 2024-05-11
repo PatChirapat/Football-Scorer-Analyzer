@@ -112,4 +112,3 @@ which contains the top football leagues' scorers data.
     ```bash
     python main.py
     ```
-   

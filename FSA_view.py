@@ -776,3 +776,4 @@ class FootballScorersAnalyzerUI(tk.Tk):
     def run(self):
         """Run the application"""
         self.mainloop()
+
