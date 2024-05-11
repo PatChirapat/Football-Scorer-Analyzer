@@ -11,9 +11,52 @@ The Football Scorers Analyzer is an application designed to help football enthus
 
 - **Distribution Graph:** Show distribution graphs for attributes including goals, expected goals, shots, and on-target shots to understand the distribution of data.
 
-- **Performance and Trends :** Analyze the performance of football players to identify trends and also compare the performance of players.
+- **Performance and Trends:** Analyze the performance of football players to identify trends and also compare the performance of players.
 
 - **Navigation Bar:** Navigate between different functionalities and features of the application.
+
+## User Interface
+
+### Initial Application Screen
+![Initial Screen](pic/UI_Start_Page.png)
+
+### Home Page
+![Home Page](pic/UI_Home.png)
+
+### Data Storytelling
+![Data Storytelling](pic/UI_DataStorytelling.png)
+
+### Descriptive Statistics
+![Descriptive Statistics](pic/UI_Descriptive.png)
+
+### Correlation
+![Correlation](pic/UI_Correlation.png)
+
+### Distribution Graph
+![Distribution Graph](pic/UI_Distribution.png)
+
+### Performance and Trends
+![Performance and Trends](pic/UI_PerfAndTrends_Topranked.png)
+![Performance and Trends](pic/UI_PerfAndTrends_Comparing.png)
+![Performance and Trends](pic/UI_PerfAndTrends_Timeseries.png)
+
+## UML Class Diagram and Sequence Diagram
+
+### UML Class Diagram
+![UML Class Diagram](pic/Project_UML_Diagram.png)
+
+### Sequence Diagram
+### Correlation Sequence Diagram
+![Sequence Diagram](pic/Sequence_Diagram_Correlation.png)
+
+### Distribution Sequence Diagram
+![Sequence Diagram](pic/Sequence_Diagram_Distribution.png)
+
+### Timeseries Sequence Diagram
+![Sequence Diagram](pic/Sequence_Diagram_Timeseries.png)
+
+### Top Ranked Sequence Diagram
+![Sequence Diagram](pic/Sequence_Diagram_Top%20Ranked.png)
 
 ## Requirements
 
@@ -22,6 +65,7 @@ The Football Scorers Analyzer is an application designed to help football enthus
   - pandas
   - matplotlib
   - numpy
+  - seaborn
 
 ## Installation and Usage
 
@@ -37,4 +81,4 @@ The Football Scorers Analyzer is an application designed to help football enthus
    ```bash
     python main.py
     ```
-   
+
