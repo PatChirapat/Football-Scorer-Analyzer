@@ -109,28 +109,35 @@ class FootballScorersAnalyzerCONTROLLER:
                                         self.view.information_display_frame)
 
     def get_factors_affecting_goals(self,display_frame):
+        """Get the factors affecting goals and display it on a frame."""
         return self.model.factors_affecting_goals(self.view.information_display_frame)
 
     def get_factors_correlation(self,key1, key2, display_frame):
+        """Get the factors correlation for two given keys and display it on a frame."""
         return self.model.factors_correlation(key1, key2,
                                                 self.view.information_display_frame)
 
     def get_top10_scorers(self):
+        """Get the top 10 scorers."""
         return self.model.top10_scorers()
 
     def get_top10_stats(self, key1, key2, display_frame):
+        """Get the top 10 stats for a given key and display it on a frame."""
         return self.model.top10_stats(key1, key2,
                                         self.view.information_display_frame)
 
     def get_fac_top_ranked(self, key1, key2, display_frame):
+        """Get the top ranked values for a given key and display it on a frame."""
         return self.model.fac_top_ranked(key1, key2,
                                          self.view.information_display_frame)
 
     def get_fac_comparing_values(self, key1, key2, display_frame):
+        """Get the comparing values for a given category and display it on a frame."""
         return self.model.fac_comparing_values(key1, key2,
                                         self.view.information_display_frame)
 
     def get_fac_timeseries_values(self, key1, key2, display_frame):
+        """Get the time series values for a given key and display it on a frame."""
         return self.model.fac_timeseries_values(key1, key2,
                                          self.view.information_display_frame)
 

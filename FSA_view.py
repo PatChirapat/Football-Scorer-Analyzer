@@ -66,9 +66,9 @@ class FootballScorersAnalyzerUI(tk.Tk):
                                ipady=3)
 
         descrpt_button = tk.Button(self.navbar_frame,
-                                        text="DESCRIPTIVE STATISTICS",
-                                        width=30,
-                                        height=3)
+                                   text="DESCRIPTIVE STATISTICS",
+                                   width=30,
+                                   height=3)
         descrpt_button.bind("<Button-1>", self.descriptive_stats_page)
         descrpt_button.grid(row=0,
                             column=1,
@@ -92,10 +92,10 @@ class FootballScorersAnalyzerUI(tk.Tk):
                                         width=20, height=3)
         distribution_button.bind("<Button-1>", self.distribution_graph_page)
         distribution_button.grid(row=0,
-                                column=3,
-                                sticky=tk.NSEW,
-                                ipadx=3,
-                                ipady=3)
+                                 column=3,
+                                 sticky=tk.NSEW,
+                                 ipadx=3,
+                                 ipady=3)
 
         perf_trends_button = tk.Button(self.navbar_frame,
                                        text="PERFORMANCE & TRENDS",
@@ -126,7 +126,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
     ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░        
     ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░        
     ░▒▓█▓▒░      ░▒▓██████▓▒░ ░▒▓██████▓▒░  ░▒▓█▓▒░   ░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓████████▓▒░ 
-                                                                                                            
+
         ░▒▓███████▓▒░░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓███████▓▒░░▒▓████████▓▒░▒▓███████▓▒░ ░▒▓███████▓▒░  
        ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░         
        ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░         
@@ -134,7 +134,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
             ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░  
             ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░  
         ░▒▓███████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░   
-                                                                                                        
+
      ░▒▓██████▓▒░░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓████████▓▒░▒▓███████▓▒░ 
     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░
     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░    ░▒▓██▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░
@@ -166,16 +166,16 @@ class FootballScorersAnalyzerUI(tk.Tk):
                                 "Factors Correlation",
                                 "Performance Stats"]
         self.data_story_combo = ttk.Combobox(data_story_menu,
-                                        values=data_story_menu_list)
+                                             values=data_story_menu_list)
         self.data_story_combo.bind("<<ComboboxSelected>>",
-                                self.data_story_telling_menu_update)
+                                   self.data_story_telling_menu_update)
         self.data_story_combo.pack(side=tk.TOP,
-                            fill=tk.BOTH,
-                            expand=True)
+                                   fill=tk.BOTH,
+                                   expand=True)
         self.data_story_combo.set("SELECT A MENU")
         data_story_menu.pack(side=tk.TOP,
-                            fill=tk.BOTH,
-                            expand=True)
+                             fill=tk.BOTH,
+                             expand=True)
 
     def data_story_telling_menu_update(self, event=None):
         """Update data storytelling menu"""
@@ -257,6 +257,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
         # Destroy other combobox
         if hasattr(self, "fact_corr"):
             self.fact_corr.destroy()
+            self.fac_perf_stat_combo.destroy()
 
         for widget in self.information_display_frame.winfo_children():
             widget.destroy()
@@ -283,6 +284,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
 
     def top10_timeseries_handler(self, event=None):
         """Top 10 timeseries handler"""
+
         for widget in self.information_display_frame.winfo_children():
             widget.destroy()
 
@@ -343,10 +345,10 @@ class FootballScorersAnalyzerUI(tk.Tk):
         for attribute in self.correlation_attributes:
             correlation_menu_listbox.insert(tk.END, attribute)
         correlation_menu_listbox.bind("<<ListboxSelect>>",
-                                        self.correlation_stats_handler)
+                                      self.correlation_stats_handler)
         correlation_menu_listbox.pack(side=tk.TOP,
-                                        fill=tk.BOTH,
-                                        expand=True)
+                                      fill=tk.BOTH,
+                                      expand=True)
         correlation_menu.pack(side=tk.LEFT,
                               fill=tk.BOTH,
                               expand=True)
@@ -380,15 +382,15 @@ class FootballScorersAnalyzerUI(tk.Tk):
         self.clearing_frame()
 
         self.distribution_attributes = ["Goals",
-                                   "Expected Goals",
-                                   "Shots",
-                                   "On Target"]
+                                        "Expected Goals",
+                                        "Shots",
+                                        "On Target"]
         distribution_menu = tk.Frame(self.information_menu_frame)
         distribution_menu_listbox = tk.Listbox(distribution_menu)
         for attribute in self.distribution_attributes:
             distribution_menu_listbox.insert(tk.END, attribute)
         distribution_menu_listbox.bind("<<ListboxSelect>>",
-                                      self.distribution_graph_handler)
+                                       self.distribution_graph_handler)
         distribution_menu_listbox.pack(side=tk.LEFT,
                                        fill=tk.BOTH,
                                        expand=True)
@@ -415,31 +417,31 @@ class FootballScorersAnalyzerUI(tk.Tk):
         perf_trends_menu = tk.Frame(self.information_menu_frame)
 
         performance_button = tk.Button(perf_trends_menu,
-                                      text="TOP OF THE RANKS",
-                                      width=20,
-                                      height=3)
+                                       text="TOP OF THE RANKS",
+                                       width=20,
+                                       height=3)
         performance_button.bind("<Button-1>", self.toprank)
         performance_button.pack(side=tk.TOP,
                                 fill=tk.BOTH,
                                 expand=True)
 
         comparing_button = tk.Button(perf_trends_menu,
-                                      text="COMPARING",
-                                      width=20,
-                                      height=3)
+                                     text="COMPARING",
+                                     width=20,
+                                     height=3)
         comparing_button.bind("<Button-1>", self.comparing)
         comparing_button.pack(side=tk.TOP,
                               fill=tk.BOTH,
                               expand=True)
 
         timeseries_button = tk.Button(perf_trends_menu,
-                                    text="TIMESERIES",
-                                    width=20,
-                                    height=3)
+                                      text="TIMESERIES",
+                                      width=20,
+                                      height=3)
         timeseries_button.configure(command=self.timeseries)
         timeseries_button.pack(side=tk.TOP,
-                            fill=tk.BOTH,
-                            expand=True)
+                               fill=tk.BOTH,
+                               expand=True)
 
         perf_trends_menu.pack(side=tk.TOP,
                               fill=tk.BOTH,
@@ -481,8 +483,8 @@ class FootballScorersAnalyzerUI(tk.Tk):
                          expand=True)
 
         topranked_menu.pack(side=tk.TOP,
-                             fill=tk.BOTH,
-                             expand=True)
+                            fill=tk.BOTH,
+                            expand=True)
 
     def toprank_handler(self, event=None):
         """Top Players and Leagues handler"""
@@ -514,11 +516,12 @@ class FootballScorersAnalyzerUI(tk.Tk):
 
         comparing_list = ["PLAYER", "LEAGUE", "CLUB"]
         self.comparing_combobox = ttk.Combobox(comparing_menu,
-                                            values=comparing_list)
+                                               values=comparing_list)
         self.comparing_combobox.pack(side=tk.TOP,
-                                fill=tk.BOTH,
-                                expand=True)
-        self.comparing_combobox.bind("<<ComboboxSelected>>", self.comparing_menu_update)
+                                     fill=tk.BOTH,
+                                     expand=True)
+        self.comparing_combobox.bind("<<ComboboxSelected>>",
+                                     self.comparing_menu_update)
         self.comparing_combobox.set("SELECT CATEGORY")
 
         comparing_menu.pack(side=tk.TOP,
@@ -549,53 +552,59 @@ class FootballScorersAnalyzerUI(tk.Tk):
         if selected_index == "PLAYER":
             player_names = self.controller.get_player()
             self.player1_combobox = ttk.Combobox(self.information_menu_frame,
-                                                values=player_names)
-            self.player1_combobox.bind("<<ComboboxSelected>>", self.comparing_wanted)
+                                                 values=player_names)
+            self.player1_combobox.bind("<<ComboboxSelected>>",
+                                       self.comparing_wanted)
             self.player1_combobox.pack(side=tk.TOP,
-                                    fill=tk.BOTH,
-                                    expand=True)
+                                       fill=tk.BOTH,
+                                       expand=True)
             self.player1_combobox.set("SELECT FIRST PLAYER")
 
             self.player2_combobox = ttk.Combobox(self.information_menu_frame,
-                                                values=player_names)
-            self.player2_combobox.bind("<<ComboboxSelected>>", self.comparing_wanted)
+                                                 values=player_names)
+            self.player2_combobox.bind("<<ComboboxSelected>>",
+                                       self.comparing_wanted)
             self.player2_combobox.pack(side=tk.TOP,
-                                    fill=tk.BOTH,
-                                    expand=True)
+                                       fill=tk.BOTH,
+                                       expand=True)
             self.player2_combobox.set("SELECT SECOND PLAYER")
         elif selected_index == "LEAGUE":
             league_names = self.controller.get_league()
             self.league1_combobox = ttk.Combobox(self.information_menu_frame,
-                                            values=league_names)
-            self.league1_combobox.bind("<<ComboboxSelected>>", self.comparing_wanted)
+                                                 values=league_names)
+            self.league1_combobox.bind("<<ComboboxSelected>>",
+                                       self.comparing_wanted)
             self.league1_combobox.pack(side=tk.TOP,
-                                    fill=tk.BOTH,
-                                    expand=True)
+                                       fill=tk.BOTH,
+                                       expand=True)
             self.league1_combobox.set("SELECT FIRST LEAGUE")
 
             self.league2_combobox = ttk.Combobox(self.information_menu_frame,
-                                            values=league_names)
-            self.league2_combobox.bind("<<ComboboxSelected>>", self.comparing_wanted)
+                                                 values=league_names)
+            self.league2_combobox.bind("<<ComboboxSelected>>",
+                                       self.comparing_wanted)
             self.league2_combobox.pack(side=tk.TOP,
-                                    fill=tk.BOTH,
-                                    expand=True)
+                                       fill=tk.BOTH,
+                                       expand=True)
             self.league2_combobox.set("SELECT SECOND LEAGUE2")
         elif selected_index == "CLUB":
             club_names = self.controller.get_club()
             self.club1_combobox = ttk.Combobox(self.information_menu_frame,
-                                            values=club_names)
-            self.club1_combobox.bind("<<ComboboxSelected>>", self.comparing_wanted)
+                                               values=club_names)
+            self.club1_combobox.bind("<<ComboboxSelected>>",
+                                     self.comparing_wanted)
             self.club1_combobox.pack(side=tk.TOP,
-                                    fill=tk.BOTH,
-                                    expand=True)
+                                     fill=tk.BOTH,
+                                     expand=True)
             self.club1_combobox.set("SELECT FIRST CLUB")
 
             self.club2_combobox = ttk.Combobox(self.information_menu_frame,
-                                            values=club_names)
-            self.club2_combobox.bind("<<ComboboxSelected>>", self.comparing_wanted)
+                                               values=club_names)
+            self.club2_combobox.bind("<<ComboboxSelected>>",
+                                     self.comparing_wanted)
             self.club2_combobox.pack(side=tk.TOP,
-                                    fill=tk.BOTH,
-                                    expand=True)
+                                     fill=tk.BOTH,
+                                     expand=True)
             self.club2_combobox.set("SELECT SECOND CLUB")
 
     def comparing_wanted(self, event=None):
@@ -612,18 +621,18 @@ class FootballScorersAnalyzerUI(tk.Tk):
         self.wanted_combobox = ttk.Combobox(self.information_menu_frame,
                                             values=wanted_list)
         self.wanted_combobox.pack(side=tk.TOP,
-                                fill=tk.BOTH,
-                                expand=True)
+                                  fill=tk.BOTH,
+                                  expand=True)
         self.wanted_combobox.set("SELECT TOPIC")
 
         self.show_button = tk.Button(self.information_menu_frame,
-                                    text="SHOW",
-                                    width=10,
-                                    height=2)
+                                     text="SHOW",
+                                     width=10,
+                                     height=2)
         self.show_button.bind("<Button-1>", self.comparing_handler)
         self.show_button.pack(side=tk.TOP,
-                            fill=tk.BOTH,
-                            expand=True)
+                              fill=tk.BOTH,
+                              expand=True)
 
     def comparing_handler(self, event=None):
         """Comparing handler"""
@@ -645,7 +654,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
             key2 = self.club1_combobox.get()
             key3 = self.club2_combobox.get()
         self.controller.get_comparing_values(key1, key2, key3, key4,
-                                            self.information_display_frame)
+                                             self.information_display_frame)
 
     def timeseries(self, event=None):
         """Timeseries of top scorers and leagues"""
@@ -654,15 +663,16 @@ class FootballScorersAnalyzerUI(tk.Tk):
 
         ts_menu = tk.Frame(self.information_menu_frame)
         self.menu_combobox = ttk.Combobox(ts_menu,
-                                    values=["PLAYER", "LEAGUE", "CLUB"])
-        self.menu_combobox.bind("<<ComboboxSelected>>", self.timeseries_menu_update)
+                                          values=["PLAYER", "LEAGUE", "CLUB"])
+        self.menu_combobox.bind("<<ComboboxSelected>>",
+                                self.timeseries_menu_update)
         self.menu_combobox.pack(side=tk.TOP,
-                            fill=tk.BOTH,
-                            expand=True)
+                                fill=tk.BOTH,
+                                expand=True)
         self.menu_combobox.set("SELECT CATEGORY")
         ts_menu.pack(side=tk.TOP,
-                    fill=tk.BOTH,
-                    expand=True)
+                     fill=tk.BOTH,
+                     expand=True)
 
     def timeseries_menu_update(self, event=None):
         """Update timeseries menu"""
@@ -683,25 +693,28 @@ class FootballScorersAnalyzerUI(tk.Tk):
             player_names = self.controller.get_player()
             self.player_combobox = ttk.Combobox(self.information_menu_frame,
                                                 values=player_names)
-            self.player_combobox.bind("<<ComboboxSelected>>", self.timeseries_wanted)
+            self.player_combobox.bind("<<ComboboxSelected>>",
+                                      self.timeseries_wanted)
             self.player_combobox.pack(side=tk.TOP,
-                                    fill=tk.BOTH,
-                                    expand=True)
+                                      fill=tk.BOTH,
+                                      expand=True)
             self.player_combobox.set("SELECT PLAYER")
         elif selected_index == "LEAGUE":
             league_names = self.controller.get_league()
             self.league_combobox = ttk.Combobox(self.information_menu_frame,
-                                            values=league_names)
-            self.league_combobox.bind("<<ComboboxSelected>>", self.timeseries_wanted)
+                                                values=league_names)
+            self.league_combobox.bind("<<ComboboxSelected>>",
+                                      self.timeseries_wanted)
             self.league_combobox.pack(side=tk.TOP,
-                                    fill=tk.BOTH,
-                                    expand=True)
+                                      fill=tk.BOTH,
+                                      expand=True)
             self.league_combobox.set("SELECT LEAGUE")
         elif selected_index == "CLUB":
             club_names = self.controller.get_club()
             self.club_combobox = ttk.Combobox(self.information_menu_frame,
-                                            values=club_names)
-            self.club_combobox.bind("<<ComboboxSelected>>", self.timeseries_wanted)
+                                              values=club_names)
+            self.club_combobox.bind("<<ComboboxSelected>>",
+                                    self.timeseries_wanted)
             self.club_combobox.pack(side=tk.TOP,
                                     fill=tk.BOTH,
                                     expand=True)
@@ -726,13 +739,13 @@ class FootballScorersAnalyzerUI(tk.Tk):
         self.ts_wanted_combobox.set("SELECT TIMESERIES TOPIC")
 
         self.ts_show_button = tk.Button(self.information_menu_frame,
-                                text="SHOW",
-                                width=10,
-                                height=2)
+                                        text="SHOW",
+                                        width=10,
+                                        height=2)
         self.ts_show_button.bind("<Button-1>", self.timeseries_handler)
         self.ts_show_button.pack(side=tk.TOP,
-                            fill=tk.BOTH,
-                            expand=True)
+                                 fill=tk.BOTH,
+                                 expand=True)
 
     def timeseries_handler(self, event=None):
         """Timeseries handler"""

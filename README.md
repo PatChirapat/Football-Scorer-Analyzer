@@ -20,6 +20,17 @@ The Football Scorers Analyzer is an application designed to help football enthus
 The data used in the application is collected from the [Kaggle dataset](https://www.kaggle.com/datasets/mohamedhanyyy/top-football-leagues-scorers) 
 which contains the top football leagues' scorers data.
 
+## Project Documentation
+
+- [Project Proposal](https://docs.google.com/document/u/1/d/11GfCmdhIuwnw_fvwifCMMZNW5HYeveySgrKEX4Kjl6M/edit?usp=gmail_thread)
+- [UML Class Diagram and Sequence Diagram](https://github.com/PatChirapat/Football-Scorer-Analyzer/wiki/UML-Class-Diagram-And-Sequence-Diagram)
+- [Project Presentation](https://youtu.be/z_gTyegpTCI)
+- [Wiki](https://github.com/PatChirapat/Football-Scorer-Analyzer/wiki)
+
+## GitHub Repository
+
+- [Football Scorers Analyzer](https://github.com/PatChirapat/Football-Scorer-Analyzer)
+
 ## User Interface
 
 ### Initial Application Screen
@@ -101,4 +112,3 @@ which contains the top football leagues' scorers data.
     ```bash
     python main.py
     ```
-

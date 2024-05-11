@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import messagebox
-
 import matplotlib
 import numpy as np
 import pandas as pd
@@ -285,7 +284,7 @@ class FootballScorersAnalyzerMODEL:
                     color=random.choice(graph_color), ax=ax)
         ax.set_xlabel('Player Names')
         ax.set_ylabel(key2)
-        ax.set_title(f'Top 5 Players in {key1}')
+        ax.set_title(f'Top Players in {key1}')
         ax.grid(True)
         plt.tight_layout()
 
