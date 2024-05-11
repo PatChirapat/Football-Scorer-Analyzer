@@ -40,7 +40,7 @@ which contains the top football leagues' scorers data.
 ![Home Page](pic/UI_Home.png)
 
 ### Data Storytelling
-![Data Storytelling](pic/UI_DataStorytelling.png)
+![Data Storytelling](pic/UI_DataStoryTelling.png)
 
 ### Descriptive Statistics
 ![Descriptive Statistics](pic/UI_Descriptive.png)
