@@ -13,6 +13,7 @@ class FootballScorersAnalyzerUI(tk.Tk):
         self.bind("<Button-1>", self.init_components)
         self.title("Football Scorers Analyzer")
         self.welcome_page()
+        self.protocol("WM_DELETE_WINDOW", self.quit)
 
     def init_components(self, event=None):
         """Initialize the components of the application"""
@@ -153,9 +154,142 @@ class FootballScorersAnalyzerUI(tk.Tk):
         press_anywhere_label.pack(expand=True)
 
     def data_story_telling_page(self, event=None):
-        """Data storytelling page(in progress)"""
+        """Data storytelling page"""
         # clear previous frame
         self.clearing_frame()
+
+        if hasattr(self, "data_story_combo"):
+            self.data_story_combo.destroy()
+
+        data_story_menu = tk.Frame(self.information_menu_frame)
+        data_story_menu_list = ["Factors Affecting Goals",
+                                "Factors Correlation",
+                                "Performance Stats"]
+        self.data_story_combo = ttk.Combobox(data_story_menu,
+                                        values=data_story_menu_list)
+        self.data_story_combo.bind("<<ComboboxSelected>>",
+                                self.data_story_telling_menu_update)
+        self.data_story_combo.pack(side=tk.TOP,
+                            fill=tk.BOTH,
+                            expand=True)
+        self.data_story_combo.set("SELECT A MENU")
+        data_story_menu.pack(side=tk.TOP,
+                            fill=tk.BOTH,
+                            expand=True)
+
+    def data_story_telling_menu_update(self, event=None):
+        """Update data storytelling menu"""
+        if hasattr(self, "fact_corr"):
+            self.fact_corr.destroy()
+        if hasattr(self, "fac_perf_stat"):
+            self.fac_perf_stat.destroy()
+        if hasattr(self, "top10_menu"):
+            self.top10_menu.destroy()
+
+        # Clear display frame
+        for widget in self.information_display_frame.winfo_children():
+            widget.destroy()
+
+        selected_index = self.data_story_combo.get()
+
+        if selected_index == "Factors Affecting Goals":
+            self.controller.get_factors_affecting_goals(
+                self.information_display_frame)
+
+        elif selected_index == "Factors Correlation":
+            self.fact_corr = tk.Frame(self.information_menu_frame)
+            self.fac_corr_list = ["Goals and Expected Goals",
+                                  "Goals and Shots",
+                                  "Goals and Shots on Target"]
+            self.fac_corr_combo = ttk.Combobox(self.fact_corr,
+                                               values=self.fac_corr_list)
+            self.fac_corr_combo.bind("<<ComboboxSelected>>",
+                                     self.factors_correlation_menu_update)
+            self.fac_corr_combo.pack(side=tk.TOP,
+                                     fill=tk.BOTH,
+                                     expand=True)
+            self.fac_corr_combo.set("SELECT CORRELATION")
+            self.fact_corr.pack(side=tk.TOP,
+                                fill=tk.BOTH,
+                                expand=True)
+
+        elif selected_index == "Performance Stats":
+            self.fac_perf_stat = tk.Frame(self.information_menu_frame)
+            perf_stats_list = ["RANKED",
+                               "IMPROVEMENTS"]
+            self.fac_perf_stat_combo = ttk.Combobox(self.fac_perf_stat,
+                                                    values=perf_stats_list)
+            self.fac_perf_stat_combo.set("SELECT MENU")
+            self.fac_perf_stat_combo.bind("<<ComboboxSelected>>",
+                                          self.top10_scorers_menu_update)
+            self.fac_perf_stat_combo.pack(side=tk.TOP,
+                                          fill=tk.BOTH,
+                                          expand=True)
+            self.fac_perf_stat.pack(side=tk.TOP,
+                                    fill=tk.BOTH,
+                                    expand=True)
+
+    def factors_correlation_menu_update(self, event=None):
+        """Update factors correlation menu"""
+        # Destroy other combobox
+        if hasattr(self, "fac_perf_stat"):
+            self.fac_perf_stat.destroy()
+
+        for widget in self.information_display_frame.winfo_children():
+            widget.destroy()
+
+        selected_index = self.fac_corr_combo.get()
+
+        if selected_index == "Goals and Expected Goals":
+            key1 = "Goals"
+            key2 = "Expected Goals"
+        elif selected_index == "Goals and Shots":
+            key1 = "Goals"
+            key2 = "Shots"
+        elif selected_index == "Goals and Shots on Target":
+            key1 = "Goals"
+            key2 = "On Target"
+        self.controller.get_factors_correlation(key1, key2,
+                                                self.information_display_frame)
+
+    def top10_scorers_menu_update(self, event=None):
+        """Top 10 scorers menu update"""
+        # Destroy other combobox
+        if hasattr(self, "fact_corr"):
+            self.fact_corr.destroy()
+
+        for widget in self.information_display_frame.winfo_children():
+            widget.destroy()
+
+        selected_index = self.fac_perf_stat_combo.get()
+
+        if selected_index == "RANKED":
+            self.controller.get_top10_stats("Goals", "Player",
+                                            self.information_display_frame)
+        elif selected_index == "IMPROVEMENTS":
+            self.top10_menu = tk.Frame(self.information_menu_frame)
+            top10_list = self.controller.get_top10_scorers()
+            self.top10_combo = ttk.Combobox(self.top10_menu,
+                                            values=top10_list)
+            self.top10_combo.bind("<<ComboboxSelected>>",
+                                  self.top10_timeseries_handler)
+            self.top10_combo.set("SELECT PLAYER")
+            self.top10_combo.pack(side=tk.TOP,
+                                  fill=tk.BOTH,
+                                  expand=True)
+            self.top10_menu.pack(side=tk.TOP,
+                                 fill=tk.BOTH,
+                                 expand=True)
+
+    def top10_timeseries_handler(self, event=None):
+        """Top 10 timeseries handler"""
+        for widget in self.information_display_frame.winfo_children():
+            widget.destroy()
+
+        selected_index = self.top10_combo.get()
+        self.controller.get_fac_timeseries_values(selected_index,
+                                                  "Goals",
+                                                  self.information_display_frame)
 
     def descriptive_stats_page(self, event=None):
         """Descriptive statistics page"""

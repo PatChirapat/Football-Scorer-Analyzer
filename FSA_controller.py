@@ -108,6 +108,32 @@ class FootballScorersAnalyzerCONTROLLER:
         return self.model.get_comparing(key1, key2, key3, key4,
                                         self.view.information_display_frame)
 
+    def get_factors_affecting_goals(self,display_frame):
+        return self.model.factors_affecting_goals(self.view.information_display_frame)
+
+    def get_factors_correlation(self,key1, key2, display_frame):
+        return self.model.factors_correlation(key1, key2,
+                                                self.view.information_display_frame)
+
+    def get_top10_scorers(self):
+        return self.model.top10_scorers()
+
+    def get_top10_stats(self, key1, key2, display_frame):
+        return self.model.top10_stats(key1, key2,
+                                        self.view.information_display_frame)
+
+    def get_fac_top_ranked(self, key1, key2, display_frame):
+        return self.model.fac_top_ranked(key1, key2,
+                                         self.view.information_display_frame)
+
+    def get_fac_comparing_values(self, key1, key2, display_frame):
+        return self.model.fac_comparing_values(key1, key2,
+                                        self.view.information_display_frame)
+
+    def get_fac_timeseries_values(self, key1, key2, display_frame):
+        return self.model.fac_timeseries_values(key1, key2,
+                                         self.view.information_display_frame)
+
     def run(self):
         """Run the application."""
         self.view.run()
